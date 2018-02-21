@@ -24,11 +24,12 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        /*$product_id = 1;
+        $product_id = 1;
+
+        /** @var \App\Product $product */
         $product = Product::find($product_id);
-        var_dump($product->categories);
-        var_dump($product);*/
-        return 123;
-//        return view('dashboard')->with('listings', $user->listings);
+//        var_dump($product->categories()->first());
+
+        return view('catalog.product.preview')->with('product', $product);
     }
 }
