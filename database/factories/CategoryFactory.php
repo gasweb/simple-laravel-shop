@@ -15,6 +15,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Category::class, function (Faker $faker) {
     return [
+        'alias' => $faker->slug,
         'title' => $faker->sentence
     ];
 });

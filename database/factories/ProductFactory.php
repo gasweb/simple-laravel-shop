@@ -15,7 +15,9 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Product::class, function (Faker $faker) {
     return [
+        'alias' => $faker->slug,
         'title' => $faker->sentence,
+        'preview_description' => $faker->text(500),
         'category_id' => $faker->numberBetween(1,100)
     ];
 });
