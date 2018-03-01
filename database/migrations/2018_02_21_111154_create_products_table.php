@@ -15,6 +15,11 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('parent_id')->nullable();
+            $table->foreign('parent_id')
+                ->references('id')->on('products')
+                ->onDelete('cascade');
+            $table->string('alias');
             $table->string('title');
             $table->text('preview_description')->nullable();
             $table->text('description')->nullable();
@@ -22,13 +27,13 @@ class CreateProductsTable extends Migration
             $table->string('seo_title')->nullable();
             $table->string('seo_keywords')->nullable();
             $table->text('seo_description')->nullable();
-            $table->integer('brand_id')->nullable();
-            $table->integer('category_id')->nullable()->unsigned()->index();
+            $table->unsignedInteger('brand_id')->nullable();
+            $table->unsignedInteger('category_id')->nullable()->index();
             $table->foreign('category_id')
                 ->references('id')->on('categories')
-                ->onDelete('cascade');
-            $table->integer('parent_id')->nullable();
-            $table->integer('uom_id')->nullable();
+                ->onDelete('set null');
+            $table->unsignedInteger('uom_id')->nullable();
+            $table->boolean('enable')->nullable();
             $table->timestamps();
         });
     }
