@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category,
+
+use App\Http\Requests\StoreCategory,
+    App\Category,
     App\Product;
 
 class CatalogController extends Controller
@@ -25,18 +27,33 @@ class CatalogController extends Controller
      */
     public function create()
     {
-        //
+        $categories_list = Category::all()->pluck('title', 'id');
+        return view('catalog.category.create')->with([
+            'categories_list' => $categories_list
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreCategory  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategory $request)
     {
-        //
+        $category = new Category();
+
+        $category->title = $request->input('title');
+        $category->alias = $request->input('alias');
+        $category->parent_id = $request->input('parent', null);
+
+        try
+        {
+            $category->save();
+            return redirect('/')->with('message', 'Todo created');
+        } catch (\Exception $exception){
+            return redirect('/catalog/create');
+        }
     }
 
     /**
