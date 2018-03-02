@@ -104,13 +104,25 @@ class CatalogController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreCategory  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreCategory $request, $id)
     {
-        //
+
+        $category = Category::find($id);
+        $category->title = $request->input('title');
+        $category->alias = $request->input('alias');
+        $category->parent_id = $request->input('parent', null);
+
+        try
+        {
+            $category->save();
+            return redirect('/')->with('message', 'Category updated');
+        } catch (\Exception $exception){
+            return redirect('/catalog/create');
+        }
     }
 
     /**
