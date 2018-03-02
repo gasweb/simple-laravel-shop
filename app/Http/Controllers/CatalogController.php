@@ -93,7 +93,12 @@ class CatalogController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        $categories_list = Category::all()->pluck('title', 'id');
+        return view('catalog.category.edit')->with([
+            'category' => $category,
+            'categories_list' => $categories_list
+        ]);
     }
 
     /**
