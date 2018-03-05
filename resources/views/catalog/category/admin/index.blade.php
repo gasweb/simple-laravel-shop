@@ -1,4 +1,4 @@
-@extends('layout/app')
+@extends('layout.admin.app')
 @section('content')
     <h1 class="text-center">{{ trans('category.admin_list_header') }}</h1>
     <a href="/admin/catalog/create"><span class="fa fa-plus-circle"> {{ trans('category.admin_new_category_link_text') }}</span></a>

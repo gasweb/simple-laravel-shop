@@ -1,4 +1,4 @@
-@extends('layout/app')
+@extends('layout.admin.app')
 @section('content')
     <h1>{{ trans('category.create_header') }}</h1>
 
