@@ -1,7 +1,7 @@
 @extends('layout.admin.app')
 @section('content')
     <h1 class="text-center">{{ trans('category.admin_list_header') }}</h1>
-    <a href="/admin/catalog/create"><span class="fa fa-plus-circle"> {{ trans('category.admin_new_category_link_text') }}</span></a>
+    <a href="{!! route('catalog.create'); !!}"><span class="fa fa-plus-circle"> {{ trans('category.admin_new_category_link_text') }}</span></a>
     <hr>
     @if(count($categories) > 0)
         <table class="table table-bordered table-striped">
@@ -19,7 +19,13 @@
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->title }}</td>
                     <td>{{ $category->alias }}</td>
-                    <td>{{ $category->parent_id }}</td>
+                    <td>
+                        @if($category->parent)
+                            <a href="{!! route('catalog.edit', ['id' => $category->parent->id ]); !!}">
+                                {{ $category->parent->title }}
+                            </a>
+                        @endif
+                    </td>
                     <td>{{ $category->created_at->format('d.M.Y H:i') }}</td>
                     <td>
                         <a href="{!! route('catalog.edit', ['id' => $category->id ]); !!}">
