@@ -8,9 +8,12 @@ use App\Http\Controllers\Controller,
     App\Http\Requests\Category\UpdateCategory as UpdateCategoryRequest,
     App\Category,
     App\Product;
+use Illuminate\Pagination\Paginator;
 
 class CatalogController extends Controller
 {
+    const PAGINATION_NUMBER = 15;
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +21,8 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('created_at', 'desc')->get();
+        $categories = Category::orderBy('created_at', 'desc')->paginate(self::PAGINATION_NUMBER);
+//        $paginator = new Paginator();
         return view('catalog.category.admin.index')->with('categories', $categories);
     }
 

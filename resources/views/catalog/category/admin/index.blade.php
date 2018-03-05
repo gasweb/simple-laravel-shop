@@ -37,5 +37,9 @@
                 </tr>
             @endforeach
         </table>
+        <div class="pagination-wrapper">
+            {{ $categories->links() }}
+        </div>
+
     @endif
 @endsection
