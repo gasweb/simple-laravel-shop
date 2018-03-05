@@ -3,9 +3,8 @@ namespace App\Http\Controllers\Catalog\Admin;
 
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\Controller;
-
-use App\Http\Requests\Category\StoreCategory as StoreCategoryRequest,
+use App\Http\Controllers\Controller,
+    App\Http\Requests\Category\StoreCategory as StoreCategoryRequest,
     App\Http\Requests\Category\UpdateCategory as UpdateCategoryRequest,
     App\Category,
     App\Product;
@@ -19,7 +18,8 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        return "Some list of categories";
+        $categories = Category::orderBy('created_at', 'desc')->get();
+        return view('catalog.category.admin.index')->with('categories', $categories);
     }
 
     /**
@@ -30,7 +30,7 @@ class CatalogController extends Controller
     public function create()
     {
         $categories_list = Category::all()->pluck('title', 'id');
-        return view('catalog.category.create')->with([
+        return view('catalog.category.admin.create')->with([
             'categories_list' => $categories_list
         ]);
     }
@@ -81,7 +81,7 @@ class CatalogController extends Controller
 //        var_dump($products);
 //        var_dump($product->categories()->first());
 
-        return view('catalog.category.alias')->with([
+        return view('catalog.category.admin.alias')->with([
             'category' => $category,
             'products' => $products
         ]);
@@ -97,7 +97,7 @@ class CatalogController extends Controller
     {
         $category = Category::find($id);
         $categories_list = Category::all()->pluck('title', 'id');
-        return view('catalog.category.edit')->with([
+        return view('catalog.category.admin.edit')->with([
             'category' => $category,
             'categories_list' => $categories_list
         ]);
@@ -136,6 +136,9 @@ class CatalogController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        $message = "Category {$category->title} deleted";
+        return redirect('catalog.index')->with('message', $message);
     }
 }
