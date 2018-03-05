@@ -11,8 +11,8 @@
                 <td>{{ trans('category.admin_list_table_alias') }}</td>
                 <td>{{ trans('category.admin_list_table_parent') }}</td>
                 <td>{{ trans('main.date_created') }}</td>
-                <td><span class="fa fa-edit"></span></td>
-                <td><span class="fa fa-remove"></span></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
             </tr>
             @foreach($categories as $category)
                 <tr>
@@ -28,7 +28,11 @@
 
                     </td>
                     <td>
-                        <span class="fa fa-remove"></span>
+                        {!! Form::open(['action' => ['Catalog\Admin\CatalogController@destroy', $category->id], 'method' => 'POST']) !!}
+                        {{ Form::inputSubmit("delete", ['class' => 'btn btn-danger']) }}
+                        {{ Form::hidden('_method', 'DELETE') }}
+                        {!! Form::close() !!}
+
                     </td>
                 </tr>
             @endforeach
