@@ -16,6 +16,7 @@ return [
     'date_created' => 'Date created',
     'date_modified' => 'Date modified',
     'id' => 'ID',
+    'site_title' => 'Main site title',
 
 
 
