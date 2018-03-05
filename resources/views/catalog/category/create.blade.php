@@ -3,8 +3,14 @@
     <h1>{{ trans('category.create_header') }}</h1>
 
     {!! Form::open(['action' => 'CatalogController@store', 'method' => 'POST']) !!}
-        {{ Form::inputText('title', trans('category.create_label'), '', ['placeholder' => trans('category.create_placeholder')]) }}
-        {{ Form::inputText('alias', trans('category.create_alias_label'), '', ['placeholder' => trans('category.create_alias_placeholder')]) }}
+        {{ Form::inputText('title', trans('category.create_label'), '', [
+        'placeholder' => trans('category.create_placeholder'),
+        'autocomplete' => 'off'
+        ]) }}
+        {{ Form::inputText('alias', trans('category.create_alias_label'), '', [
+        'placeholder' => trans('category.create_alias_placeholder'),
+        'autocomplete' => 'off'
+        ]) }}
 
     {{-- If categories exists --}}
     @if($categories_list)
