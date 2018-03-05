@@ -24,6 +24,7 @@ return [
     'admin_list_table_alias' => 'Alias',
     'admin_list_table_parent' => 'Parent',
     'admin_new_category_link_text' => 'Create new category',
+    'admin_menu_title' => 'Categories',
 
 
 
