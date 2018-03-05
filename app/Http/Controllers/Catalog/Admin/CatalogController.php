@@ -120,9 +120,7 @@ class CatalogController extends Controller
         try
         {
             $category->save();
-//            return redirect('/')->with('message', 'Category updated');
         } catch (\Exception $exception){
-//            return redirect('/catalog/create');
 
         }
         return redirect()->route('catalog.edit', ['id'=> $category->id]);
@@ -137,8 +135,14 @@ class CatalogController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
-        $category->delete();
-        $message = "Category {$category->title} deleted";
-        return redirect('catalog.index')->with('message', $message);
+        try{
+            $category->delete();
+            $message = "Category {$category->title} deleted";
+        }
+        catch (\Exception $exception){
+            $message = "Something wrong";
+        }
+
+        return redirect()->route('catalog.index')->with('message', $message);
     }
 }
