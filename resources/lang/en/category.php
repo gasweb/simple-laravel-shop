@@ -19,5 +19,12 @@ return [
     'create_label_parent_select' => 'Parent category',
     'create_alias_label' => 'Alias',
     'create_alias_placeholder' => 'Enter alias',
+    'admin_list_header' => 'Categories',
+    'admin_list_table_title' => 'Title',
+    'admin_list_table_alias' => 'Alias',
+    'admin_list_table_parent' => 'Parent',
+    'admin_new_category_link_text' => 'Create new category',
+
+
 
 ];
