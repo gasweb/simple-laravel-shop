@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests\StoreCategory,
+use App\Http\Requests\Category\StoreCategory as StoreCategoryRequest,
+    App\Http\Requests\Category\UpdateCategory as UpdateCategoryRequest,
     App\Category,
     App\Product;
 
@@ -36,10 +37,10 @@ class CatalogController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCategory  $request
+     * @param  \App\Http\Requests\Category\StoreCategory  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategory $request)
+    public function store(StoreCategoryRequest $request)
     {
         $category = new Category();
 
@@ -104,13 +105,12 @@ class CatalogController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCategory  $request
+     * @param  \App\Http\Requests\Category\UpdateCategory  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreCategory $request, $id)
+    public function update(UpdateCategoryRequest $request, $id)
     {
-
         $category = Category::find($id);
         $category->title = $request->input('title');
         $category->alias = $request->input('alias');
@@ -119,10 +119,12 @@ class CatalogController extends Controller
         try
         {
             $category->save();
-            return redirect('/')->with('message', 'Category updated');
+//            return redirect('/')->with('message', 'Category updated');
         } catch (\Exception $exception){
-            return redirect('/catalog/create');
+//            return redirect('/catalog/create');
+
         }
+        return redirect()->route('catalog.edit', ['id'=> $category->id]);
     }
 
     /**
