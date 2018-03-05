@@ -20,7 +20,7 @@
                     <td>{{ $category->title }}</td>
                     <td>{{ $category->alias }}</td>
                     <td>{{ $category->parent_id }}</td>
-                    <td>{{ $category->date_created }}</td>
+                    <td>{{ $category->created_at->format('d.M.Y H:i') }}</td>
                     <td>
                         <a href="{!! route('catalog.edit', ['id' => $category->id ]); !!}">
                             <span class="fa fa-edit"></span>
