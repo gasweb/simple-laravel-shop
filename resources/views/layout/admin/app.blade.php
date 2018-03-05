@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
-    @include('inc.navbar')
+    @include('inc.admin.navbar.navbar')
     <div class="container">
         @include('inc.messages')
         @yield('content')

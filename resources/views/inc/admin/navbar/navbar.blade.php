@@ -9,7 +9,7 @@
                     <a class="nav-link" href="/"><span class="fa fa-home"></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('catalog') ? 'active' : '' }}" href="/catalog">Каталог</a>
+                    <a class="nav-link {{ Route::is('catalog.index') ? 'active' : '' }}" href="{!! route('catalog.index'); !!}">{{ trans('category.admin_menu_title') }}</a>
                 </li>
             </ul>
         </div>
