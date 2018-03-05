@@ -1,14 +1,13 @@
 <?php
 namespace App\Http\Controllers\Catalog\Admin;
 
-use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller,
     App\Http\Requests\Category\StoreCategory as StoreCategoryRequest,
     App\Http\Requests\Category\UpdateCategory as UpdateCategoryRequest,
     App\Category,
     App\Product;
-use Illuminate\Pagination\Paginator;
+
+use Illuminate\Support\Facades\Lang;
 
 class CatalogController extends Controller
 {
@@ -22,7 +21,6 @@ class CatalogController extends Controller
     public function index()
     {
         $categories = Category::orderBy('created_at', 'desc')->paginate(self::PAGINATION_NUMBER);
-//        $paginator = new Paginator();
         return view('catalog.category.admin.index')->with('categories', $categories);
     }
 
@@ -34,6 +32,7 @@ class CatalogController extends Controller
     public function create()
     {
         $categories_list = Category::all()->pluck('title', 'id');
+        $categories_list->prepend(Lang::get('category.admin_category_select_empty_option'), '');
         return view('catalog.category.admin.create')->with([
             'categories_list' => $categories_list
         ]);
@@ -56,19 +55,19 @@ class CatalogController extends Controller
         try
         {
             $category->save();
-            return redirect('/')->with('message', 'Todo created');
+            return redirect()->route('catalog.edit', ['id'=> $category->id]);
         } catch (\Exception $exception){
-            return redirect('/catalog/create');
+            return redirect()->route('catalog.create');
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  string $alias
+     * @param  integer $id
      * @return \Illuminate\Http\Response
      */
-    public function show($alias)
+    public function show($id)
     {
         $product_id = 1;
 
@@ -101,6 +100,7 @@ class CatalogController extends Controller
     {
         $category = Category::find($id);
         $categories_list = Category::all()->pluck('title', 'id');
+        $categories_list->prepend(Lang::get('category.admin_category_select_empty_option'), '');
         return view('catalog.category.admin.edit')->with([
             'category' => $category,
             'categories_list' => $categories_list
