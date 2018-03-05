@@ -2,7 +2,7 @@
 @section('content')
     <h1>{{ trans('category.create_header') }}</h1>
 
-    {!! Form::open(['action' => 'CatalogController@store', 'method' => 'POST']) !!}
+    {!! Form::open(['action' => 'Catalog\Admin\CatalogController@store', 'method' => 'POST']) !!}
         {{ Form::inputText('title', trans('category.create_label'), '', [
         'placeholder' => trans('category.create_placeholder'),
         'autocomplete' => 'off'

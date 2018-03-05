@@ -15,4 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('catalog','CatalogController');
+Route::resource('catalog','Catalog\Admin\CatalogController');
