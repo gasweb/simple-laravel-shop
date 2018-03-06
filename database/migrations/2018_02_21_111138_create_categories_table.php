@@ -19,9 +19,13 @@ class CreateCategoriesTable extends Migration
             $table->foreign('parent_id')
                 ->references('id')->on('categories')
                 ->onDelete('cascade');
+            $table->unsignedInteger('cover_image_id')->nullable();
+            $table->foreign('cover_image_id')
+                ->references('id')->on('images')
+                ->onDelete('set null');
             $table->string('alias');
             $table->string('title');
-            $table->string('title_translate')->nullable();
+            $table->string('title_alternative')->nullable();
             $table->timestamps();
         });
     }

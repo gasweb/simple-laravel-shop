@@ -33,6 +33,10 @@ class CreateProductsTable extends Migration
                 ->references('id')->on('categories')
                 ->onDelete('set null');
             $table->unsignedInteger('uom_id')->nullable();
+            $table->unsignedInteger('cover_image_id')->nullable();
+            $table->foreign('cover_image_id')
+                ->references('id')->on('images')
+                ->onDelete('set null');
             $table->boolean('enable')->nullable();
             $table->timestamps();
         });
