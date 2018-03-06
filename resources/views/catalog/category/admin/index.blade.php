@@ -7,9 +7,9 @@
         <table class="table table-bordered table-striped">
             <tr>
                 <td>{{ trans('main.id') }}</td>
+                <td>{{ trans('category.admin_list_table_parent') }}</td>
                 <td>{{ trans('category.admin_list_table_title') }}</td>
                 <td>{{ trans('category.admin_list_table_alias') }}</td>
-                <td>{{ trans('category.admin_list_table_parent') }}</td>
                 <td>{{ trans('main.date_created') }}</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
@@ -17,8 +17,6 @@
             @foreach($categories as $category)
                 <tr>
                     <td>{{ $category->id }}</td>
-                    <td>{{ $category->title }}</td>
-                    <td>{{ $category->alias }}</td>
                     <td>
                         @if($category->parent)
                             <a href="{!! route('catalog.edit', ['id' => $category->parent->id ]); !!}">
@@ -26,6 +24,8 @@
                             </a>
                         @endif
                     </td>
+                    <td>{{ $category->title }}</td>
+                    <td>{{ $category->alias }}</td>
                     <td>{{ $category->created_at->format('d.M.Y H:i') }}</td>
                     <td>
                         <a href="{!! route('catalog.edit', ['id' => $category->id ]); !!}">
