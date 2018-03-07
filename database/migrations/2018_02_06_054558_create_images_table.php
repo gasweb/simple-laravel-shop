@@ -20,6 +20,7 @@ class CreateImagesTable extends Migration
             $table->string('path_large');
             $table->string('src_small');
             $table->string('src_large');
+            $table->string('mime_type');
             $table->timestamps();
         });
     }
