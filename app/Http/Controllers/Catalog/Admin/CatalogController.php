@@ -5,9 +5,11 @@ use App\Http\Controllers\Controller,
     App\Http\Requests\Category\StoreCategory as StoreCategoryRequest,
     App\Http\Requests\Category\UpdateCategory as UpdateCategoryRequest,
     App\Category,
-    App\Product;
+    App\Product,
+    App\Image;
 
-use Illuminate\Support\Facades\Lang;
+use Illuminate\Http\Request,
+    Illuminate\Support\Facades\Lang;
 
 class CatalogController extends Controller
 {
@@ -36,6 +38,36 @@ class CatalogController extends Controller
         return view('catalog.category.admin.create')->with([
             'categories_list' => $categories_list
         ]);
+    }
+
+    /**
+     * Method to upload image and bind to current category
+     * @param \Illuminate\Http\Request $request
+     * @param integer $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function imageStore(Request $request, $id)
+    {
+        try{
+            /** @var \App\Category $category */
+            $category = Category::findOrFail($id);
+
+            $current_image = $category->image;
+
+            if ($current_image)
+            {
+               Image::destroyImage($current_image);
+            }
+
+            $image_id = Image::uploadImage($request);
+
+
+            $category->cover_image_id = $image_id;
+            $category->save();
+
+            return redirect()->route('catalog.edit', ['id'=> $category->id]);
+        } catch (\Exception $exception){
+        }
     }
 
     /**
