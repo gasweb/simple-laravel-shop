@@ -20,4 +20,10 @@
     {{ Form::hidden('_method', 'PUT') }}
     {!! Form::close() !!}
 
+    <div class="jumbotron">
+        @if($category->image)
+            <img src="{{ $category->image->src_small }}" alt="">
+        @endif
+        {{ Form::fileUpload('category_image', ['Catalog\Admin\CatalogController@imageStore', $category->id], trans('main.upload_image'), [], trans('main.upload'), ['class' => 'btn btn-primary']) }}
+    </div>
 @endsection
