@@ -17,6 +17,8 @@ return [
     'date_modified' => 'Date modified',
     'id' => 'ID',
     'site_title' => 'Main site title',
+    'upload' => 'Upload',
+    'upload_image' => 'Upload Image',
 
 
 
