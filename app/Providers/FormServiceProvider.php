@@ -14,6 +14,7 @@ class FormServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Form::component('fileUpload', 'components.form.file_upload', ['name', 'action', 'label' => null, 'attributes' => [], 'button_value', 'button_attributes' => []]);
         Form::component('hidden', 'components.form.hidden', ['name', 'value' => null, 'attributes']);
         Form::component('inputText', 'components.form.text', ['name', 'label' => null, 'value', 'attributes']);
         Form::component('formSelect', 'components.form.select', ['name', 'label' => null, 'data', 'default' => '', 'attributes']);
