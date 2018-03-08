@@ -33,8 +33,7 @@ class CatalogController extends Controller
      */
     public function create()
     {
-        $categories_list = Category::all()->pluck('title', 'id');
-        $categories_list->prepend(Lang::get('category.admin_category_select_empty_option'), '');
+        $categories_list = Category::getSelectList();
         return view('catalog.category.admin.create')->with([
             'categories_list' => $categories_list
         ]);
@@ -104,7 +103,7 @@ class CatalogController extends Controller
         $product_id = 1;
 
         /** @var \App\Category $category */
-        $category = Category::where(['alias' => $alias])->first();
+        $category = Category::where(['alias' => ''])->first();
 
 
         if (!$category){
@@ -131,8 +130,7 @@ class CatalogController extends Controller
     public function edit($id)
     {
         $category = Category::find($id);
-        $categories_list = Category::all()->pluck('title', 'id');
-        $categories_list->prepend(Lang::get('category.admin_category_select_empty_option'), '');
+        $categories_list = Category::getSelectList();
         return view('catalog.category.admin.edit')->with([
             'category' => $category,
             'categories_list' => $categories_list
