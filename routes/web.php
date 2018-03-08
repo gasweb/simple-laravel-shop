@@ -16,4 +16,6 @@ Route::get('/', function () {
 });
 
 Route::resource('admin/catalog','Catalog\Admin\CatalogController');
+Route::resource('admin/product','Product\Admin\ProductController');
 Route::post('admin/catalog/{id}/image-store', 'Catalog\Admin\CatalogController@imageStore')->name('category.image.store');
+Route::post('admin/product/{id}/image-store', 'Product\Admin\ProductController@imageStore')->name('product.image.store');
