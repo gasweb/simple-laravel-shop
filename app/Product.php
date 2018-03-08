@@ -4,6 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Product
+ * @package App
+ * @property integer id
+ * @property string title
+ * @property string alias
+ * @property integer parent_id
+ */
 class Product extends Model
 {
     /**
