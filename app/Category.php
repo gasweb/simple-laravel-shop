@@ -33,6 +33,6 @@ class Category extends Model
 
     public function image()
     {
-        return $this->belongsTo(Image::class);
+        return $this->belongsTo(Image::class, 'cover_image_id');
     }
 }
