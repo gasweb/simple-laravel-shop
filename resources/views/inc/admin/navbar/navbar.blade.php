@@ -11,6 +11,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('catalog.index') ? 'active' : '' }}" href="{!! route('catalog.index'); !!}">{{ trans('category.admin_menu_title') }}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('product.index') ? 'active' : '' }}" href="{!! route('product.index'); !!}">{{ trans('product.admin_menu_title') }}</a>
+                </li>
             </ul>
         </div>
     </nav>
