@@ -28,6 +28,9 @@ class CreateProductsTable extends Migration
             $table->string('seo_keywords')->nullable();
             $table->text('seo_description')->nullable();
             $table->unsignedInteger('brand_id')->nullable();
+            $table->foreign('brand_id')
+                ->references('id')->on('brands')
+                ->onDelete('set null');
             $table->unsignedInteger('category_id')->nullable()->index();
             $table->foreign('category_id')
                 ->references('id')->on('categories')
