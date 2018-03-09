@@ -19,7 +19,7 @@
 
     {{-- If brands exists --}}
     @if($brands_list)
-        {{ Form::formSelect('brand', trans('brand.admin_brand_select_label'), $brands_list, '', []) }}
+        {{ Form::formSelect('brand', trans('brand.admin_brand_select_label'), $brands_list, $product->brand_id, []) }}
     @endif
     {{ Form::inputSubmit('submit', ['class' => 'btn btn-primary']) }}
     {{ Form::hidden('_method', 'PUT') }}
