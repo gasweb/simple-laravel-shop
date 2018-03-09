@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller,
     App\Http\Requests\Product\UpdateProduct as UpdateProductRequest,
     App\Category,
     App\Product,
-    App\Image;
+    App\Image,
+    App\Brand;
 
 use Illuminate\Http\Request,
     Illuminate\Support\Facades\Lang;
@@ -34,8 +35,10 @@ class ProductController extends Controller
     public function create()
     {
         $categories_list = Category::getSelectList();
+        $brands_list = Brand::getSelectList();
         return view('catalog.product.admin.create')->with([
-            'categories_list' => $categories_list
+            'categories_list' => $categories_list,
+            'brands_list' => $brands_list
         ]);
     }
 
@@ -52,6 +55,7 @@ class ProductController extends Controller
         $product->title = $request->input('title');
         $product->alias = $request->input('alias');
         $product->parent_id = $request->input('parent', null);
+        $product->brand_id = $request->input('brand', null);
 
         try
         {
@@ -83,9 +87,11 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $categories_list = Category::getSelectList();
+        $brands_list = Brand::getSelectList();
         return view('catalog.product.admin.edit')->with([
             'product' => $product,
-            'categories_list' => $categories_list
+            'categories_list' => $categories_list,
+            'brands_list' => $brands_list
         ]);
     }
 
@@ -102,6 +108,7 @@ class ProductController extends Controller
         $product->title = $request->input('title');
         $product->alias = $request->input('alias');
         $product->parent_id = $request->input('parent', null);
+        $product->brand_id = $request->input('brand', null);
 
         try
         {
