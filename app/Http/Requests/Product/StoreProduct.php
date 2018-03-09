@@ -24,7 +24,7 @@ class StoreProduct extends FormRequest
     {
         return [
             'title' => 'required|max:255',
-            'alias' => 'required|unique:categories|max:255',
+            'alias' => 'required|unique:products|max:255',
         ];
     }
 }

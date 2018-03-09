@@ -24,7 +24,7 @@ class UpdateProduct extends FormRequest
     {
         return [
             'title' => 'required|max:255',
-            'alias' => 'required|max:255|unique:categories,alias,'.$this->route('catalog').',id',
+            'alias' => 'required|max:255|unique:products,alias,'.$this->route('product').',id',
         ];
     }
 }
