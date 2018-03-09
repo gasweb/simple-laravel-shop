@@ -29,6 +29,6 @@
         @if($product->image)
             <img src="{{ $product->image->src_small }}" alt="">
         @endif
-        {{ Form::fileUpload('product_image', ['Product\Admin\ProductController@imageStore', $product->id], trans('main.upload_image'), [], trans('main.upload'), ['class' => 'btn btn-primary']) }}
+        {{ Form::fileUpload('product_image', ['Product\Admin\ProductController@imageStore', $product->id], trans('main.upload_image'), ['multiple' => 'true'], trans('main.upload'), ['class' => 'btn btn-primary']) }}
     </div>
 @endsection
