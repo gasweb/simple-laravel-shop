@@ -14,6 +14,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('product.index') ? 'active' : '' }}" href="{!! route('product.index'); !!}">{{ trans('product.admin_menu_title') }}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('brand.index') ? 'active' : '' }}" href="{!! route('brand.index'); !!}">{{ trans('brand.admin_menu_title') }}</a>
+                </li>
             </ul>
         </div>
     </nav>
