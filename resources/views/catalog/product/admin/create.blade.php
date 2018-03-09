@@ -16,6 +16,11 @@
     @if($categories_list)
         {{ Form::formSelect('parent', trans('product.admin_category_select_label'), $categories_list, '', []) }}
     @endif
+
+    {{-- If brands exists --}}
+    @if($brands_list)
+        {{ Form::formSelect('brand', trans('brand.admin_brand_select_label'), $brands_list, '', []) }}
+    @endif
         {{ Form::inputSubmit('submit', ['class' => 'btn btn-primary']) }}
     {!! Form::close() !!}
 
