@@ -2,7 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model,
+    Illuminate\Support\Facades\Lang;
 
 /**
  * Class Brand
@@ -16,5 +17,16 @@ class Brand extends Model
     public function product()
     {
         return $this->belongsTo('App\Product');
+    }
+
+    /**
+     * Method to get collection for form select
+     * @return \Illuminate\Support\Collection
+     */
+    public static function getSelectList()
+    {
+        $brands_list = self::all()->pluck('title', 'id');
+        $brands_list->prepend(Lang::get('brand.admin_brand_select_empty_option'), '');
+        return $brands_list;
     }
 }
