@@ -24,6 +24,8 @@ return [
     'admin_list_table_parent' => 'Parent',
     'admin_new_brand_link_text' => 'Create new brand',
     'admin_menu_title' => 'Brands',
+    'admin_brand_select_label' => 'Brand',
+    'admin_brand_select_empty_option' => 'Select brand',
 
 
 
