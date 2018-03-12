@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string alias
  * @property integer parent_id
  * @property integer brand_id
+ * @property boolean enable
+ * @property boolean available
  */
 class Product extends Model
 {
