@@ -16,9 +16,29 @@ use Illuminate\Database\Eloquent\Model,
  * @property integer brand_id
  * @property boolean enable
  * @property boolean available
+ * @property \Illuminate\Database\Eloquent\Collection children
+ * @property \App\Product parent
  */
 class Product extends Model
 {
+    /**
+     * Gets parent product
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function parent()
+    {
+        return $this->belongsTo(Product::class, 'parent_id');
+    }
+
+    /**
+     * Gets children collection
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function children()
+    {
+        return $this->hasMany(Product::class, 'parent_id');
+    }
+
     /**
      * Adds Category one to many relationship
      */
