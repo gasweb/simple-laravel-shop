@@ -41,6 +41,7 @@ class CreateProductsTable extends Migration
                 ->references('id')->on('images')
                 ->onDelete('set null');
             $table->boolean('enable')->nullable();
+            $table->boolean('available')->nullable();
             $table->timestamps();
         });
     }
