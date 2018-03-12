@@ -24,7 +24,7 @@ class CategorySingleImage extends FormRequest
     public function rules()
     {
         return [
-            'category_image' => 'required|file|mimes:bmp,png',
+            'category_image' => 'required|file|mimes:jpeg,png',
         ];
     }
 }
