@@ -70,6 +70,37 @@ class BrandController extends Controller
     }
 
     /**
+     * Method to upload image and bind to current brand
+     * @param \Illuminate\Http\Request $request
+     * @param integer $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function imageStore(Request $request, $id)
+    {
+        try{
+            /** @var \App\Brand $brand */
+            $brand = Brand::findOrFail($id);
+
+            $current_image = $brand->image;
+
+            if ($current_image)
+            {
+                Image::destroyImage($current_image);
+            }
+
+            $image_id = Image::uploadImage($request);
+
+
+            $brand->cover_image_id = $image_id;
+            $brand->save();
+
+            return redirect()->route('brand.edit', ['id'=> $brand->id]);
+        } catch (\Exception $exception){
+
+        }
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
