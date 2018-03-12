@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Brand\Admin;
 use App\Http\Controllers\Controller,
     App\Http\Requests\Brand\StoreBrand as StoreBrandRequest,
     App\Http\Requests\Brand\UpdateBrand as UpdateBrandRequest,
+    App\Http\Requests\Brand\BrandSingleImage as StoreBrandSingleImageRequest,
     App\Category,
     App\Brand,
     App\Image;
@@ -71,11 +72,11 @@ class BrandController extends Controller
 
     /**
      * Method to upload image and bind to current brand
-     * @param \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\Brand\BrandSingleImage $request
      * @param integer $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function imageStore(Request $request, $id)
+    public function imageStore(StoreBrandSingleImageRequest $request, $id)
     {
         try{
             /** @var \App\Brand $brand */
@@ -88,7 +89,7 @@ class BrandController extends Controller
                 Image::destroyImage($current_image);
             }
 
-            $image_id = Image::uploadImage($request);
+            $image_id = Image::uploadImage($request, 'brand_image');
 
 
             $brand->cover_image_id = $image_id;
