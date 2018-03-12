@@ -104,11 +104,14 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, $id)
     {
+        /** @var \App\Product $product */
         $product = Product::find($id);
         $product->title = $request->input('title');
         $product->alias = $request->input('alias');
         $product->parent_id = $request->input('parent', null);
         $product->brand_id = $request->input('brand', null);
+        $product->enable = $request->input('enable', false);
+        $product->available = $request->input('available', false);
 
         try
         {
