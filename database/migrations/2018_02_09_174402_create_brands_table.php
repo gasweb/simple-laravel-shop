@@ -17,6 +17,10 @@ class CreateBrandsTable extends Migration
             $table->increments('id');
             $table->string('alias');
             $table->string('title');
+            $table->unsignedInteger('cover_image_id')->nullable();
+            $table->foreign('cover_image_id')
+                ->references('id')->on('images')
+                ->onDelete('set null');
             $table->timestamps();
         });
     }
