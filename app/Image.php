@@ -22,11 +22,12 @@ class Image extends Model
     /**
      * Method to upload image from form
      * @param Request $request
+     * @param string $file_input_key
      * @return int|null
      */
-    public static function uploadImage(Request $request)
+    public static function uploadImage(Request $request, $file_input_key)
     {
-        $file = $request->file('category_image');
+        $file = $request->file($file_input_key);
 
         if ($file)
         {
