@@ -86,10 +86,12 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
+        $products_list = Product::getSelectList();
         $categories_list = Category::getSelectList();
         $brands_list = Brand::getSelectList();
         return view('catalog.product.admin.edit')->with([
             'product' => $product,
+            'products_list' => $products_list,
             'categories_list' => $categories_list,
             'brands_list' => $brands_list
         ]);
@@ -109,6 +111,7 @@ class ProductController extends Controller
         $product->title = $request->input('title');
         $product->alias = $request->input('alias');
         $product->parent_id = $request->input('parent', null);
+        $product->category_id = $request->input('parent', null);
         $product->brand_id = $request->input('brand', null);
         $product->enable = $request->input('enable', false);
         $product->available = $request->input('available', false);
