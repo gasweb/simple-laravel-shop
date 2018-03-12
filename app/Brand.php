@@ -12,12 +12,27 @@ use Illuminate\Database\Eloquent\Model,
  * @property string alias
  * @property integer id
  * @property integer cover_image_id
+ * @property \App\Image image
+ * @property \App\Product product
  */
 class Brand extends Model
 {
+    /**
+     * Foreign key connection with product table
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * Foreign key connection with image table
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function image()
+    {
+        return $this->belongsTo(Image::class, 'cover_image_id');
     }
 
     /**
