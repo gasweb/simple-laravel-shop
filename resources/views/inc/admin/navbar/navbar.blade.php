@@ -5,8 +5,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
-                    <a class="nav-link" href="/"><span class="fa fa-home"></span></a>
+                <li class="nav-item {{ Request::is('/backoffice') ? 'active' : '' }}">
+                    <a class="nav-link" href="{!! route('backoffice.index'); !!}"><span class="fa fa-home"></span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('catalog.index') ? 'active' : '' }}" href="{!! route('catalog.index'); !!}">{{ trans('category.admin_menu_title') }}</a>
