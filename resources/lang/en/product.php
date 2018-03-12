@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'create_label' => 'Create new product',
+    'label_title' => 'Product title',
     'create_header' => 'New product',
     'edit_header' => 'Edit product',
     'create_placeholder' => 'Enter product title',
@@ -30,6 +30,8 @@ return [
     'admin_category_select_label' => 'Category',
     'form_enable' => 'Enable',
     'form_available' => 'Available',
+    'admin_list_table_children' => 'Children',
+    'admin_product_select_empty_option' => 'Select product',
 
 
 
