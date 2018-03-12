@@ -27,6 +27,8 @@ return [
     'admin_menu_title' => 'Products',
     'admin_category_select_empty_option' => 'Select category',
     'admin_category_select_label' => 'Category',
+    'form_enable' => 'Enable',
+    'form_available' => 'Available',
 
 
 
