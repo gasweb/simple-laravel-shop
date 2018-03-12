@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model,
  * @property string title
  * @property string alias
  * @property integer id
+ * @property integer cover_image_id
  */
 class Brand extends Model
 {
