@@ -1,6 +1,13 @@
 @extends('layout.admin.app')
 @section('content')
-    <h1>{{ trans('product.create_header') }}</h1>
+    <h1>{{ trans('product.edit_header') }}</h1>
+
+    <div class="jumbotron">
+        @if($product->image)
+            <img src="{{ $product->image->src_small }}" alt="">
+        @endif
+        {{ Form::fileUpload('product_image', ['Product\Admin\ProductController@imageStore', $product->id], trans('main.upload_image'), ['multiple' => 'true'], trans('main.upload'), ['class' => 'btn btn-primary']) }}
+    </div>
 
     {!! Form::open(['action' => ['Product\Admin\ProductController@update', $product->id], 'method' => 'POST']) !!}
     {{ Form::inputText('title', trans('product.create_label'), $product->title, [
@@ -28,11 +35,4 @@
     {{ Form::inputSubmit('submit', ['class' => 'btn btn-primary']) }}
     {{ Form::hidden('_method', 'PUT') }}
     {!! Form::close() !!}
-
-    <div class="jumbotron">
-        @if($product->image)
-            <img src="{{ $product->image->src_small }}" alt="">
-        @endif
-        {{ Form::fileUpload('product_image', ['Product\Admin\ProductController@imageStore', $product->id], trans('main.upload_image'), ['multiple' => 'true'], trans('main.upload'), ['class' => 'btn btn-primary']) }}
-    </div>
 @endsection
