@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Catalog\Admin;
 use App\Http\Controllers\Controller,
     App\Http\Requests\Category\StoreCategory as StoreCategoryRequest,
     App\Http\Requests\Category\UpdateCategory as UpdateCategoryRequest,
+    App\Http\Requests\Category\CategorySingleImage as StoreCategorySingleImageRequest,
     App\Category,
     App\Product,
     App\Image;
@@ -41,11 +42,11 @@ class CatalogController extends Controller
 
     /**
      * Method to upload image and bind to current category
-     * @param \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\Category\CategorySingleImage $request
      * @param integer $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function imageStore(Request $request, $id)
+    public function imageStore(StoreCategorySingleImageRequest $request, $id)
     {
         try{
             /** @var \App\Category $category */
@@ -58,7 +59,7 @@ class CatalogController extends Controller
                Image::destroyImage($current_image);
             }
 
-            $image_id = Image::uploadImage($request);
+            $image_id = Image::uploadImage($request, 'category_image');
 
 
             $category->cover_image_id = $image_id;
