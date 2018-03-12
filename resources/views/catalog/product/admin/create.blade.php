@@ -3,7 +3,7 @@
     <h1>{{ trans('product.create_header') }}</h1>
 
     {!! Form::open(['action' => 'Product\Admin\ProductController@store', 'method' => 'POST']) !!}
-        {{ Form::inputText('title', trans('product.create_label'), '', [
+        {{ Form::inputText('title', trans('product.label_title'), '', [
         'placeholder' => trans('product.create_placeholder'),
         'autocomplete' => 'off'
         ]) }}
