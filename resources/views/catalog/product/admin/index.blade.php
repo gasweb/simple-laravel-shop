@@ -14,6 +14,7 @@
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
+            <?php /** @var \App\Product $product */ ?>
             @foreach($products as $product)
                 <tr>
                     <td>{{ $product->id }}</td>
