@@ -15,6 +15,7 @@ return [
 
     'create_label' => 'Create new product',
     'create_header' => 'New product',
+    'edit_header' => 'Edit product',
     'create_placeholder' => 'Enter product title',
     'create_label_parent_select' => 'Parent product',
     'create_alias_label' => 'Alias',
