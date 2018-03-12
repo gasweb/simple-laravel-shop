@@ -27,60 +27,63 @@ class Image extends Model
     public static function uploadImage(Request $request)
     {
         $file = $request->file('category_image');
-        $mime_type = $file->getMimeType();
 
-
-        $file_path = self::getFilePath($mime_type);
-        $small_file_path = self::getFilePath($mime_type);
-
-        if (isset($file_path['directory']) && isset($file_path['file_name']) && isset($small_file_path['directory']) && isset($small_file_path['file_name']))
+        if ($file)
         {
-            $file->move($file_path['directory'],$file_path['file_name']);
+            $mime_type = $file->getMimeType();
 
-            try {
+            $file_path = self::getFilePath($mime_type);
+            $small_file_path = self::getFilePath($mime_type);
 
-                /** @var \Imagick $imagick */
-                $imagick = new \Imagick($file_path['directory'].DIRECTORY_SEPARATOR.$file_path['file_name']);
+            if (isset($file_path['directory']) && isset($file_path['file_name']) && isset($small_file_path['directory']) && isset($small_file_path['file_name']))
+            {
+                $file->move($file_path['directory'],$file_path['file_name']);
 
-                $geometry = $imagick->getImageGeometry();
-                $image_width = $geometry['width'];
-                $image_height = $geometry['height'];
+                try {
 
-                $geometry_converter = function ($image_width_original, $image_height_original, $image_width, $image_height) {
-                    if ($image_width_original < $image_width && $image_height_original < $image_height) {
-                        return ['width' => $image_width_original, 'height' => $image_height_original];
-                    } else {
-                        $is_album = $image_width_original > $image_height_original ? true : false;
-                        if ($is_album) {
-                            $scale = $image_width_original > $image_width ? $image_width/$image_width_original : 1;
+                    /** @var \Imagick $imagick */
+                    $imagick = new \Imagick($file_path['directory'].DIRECTORY_SEPARATOR.$file_path['file_name']);
+
+                    $geometry = $imagick->getImageGeometry();
+                    $image_width = $geometry['width'];
+                    $image_height = $geometry['height'];
+
+                    $geometry_converter = function ($image_width_original, $image_height_original, $image_width, $image_height) {
+                        if ($image_width_original < $image_width && $image_height_original < $image_height) {
+                            return ['width' => $image_width_original, 'height' => $image_height_original];
                         } else {
-                            $scale = $image_height_original > $image_height ? $image_height/$image_height_original : 1;
+                            $is_album = $image_width_original > $image_height_original ? true : false;
+                            if ($is_album) {
+                                $scale = $image_width_original > $image_width ? $image_width/$image_width_original : 1;
+                            } else {
+                                $scale = $image_height_original > $image_height ? $image_height/$image_height_original : 1;
+                            }
+                            return ['width' => $scale*$image_width_original, 'height' => $scale*$image_height_original];
                         }
-                        return ['width' => $scale*$image_width_original, 'height' => $scale*$image_height_original];
-                    }
-                };
+                    };
 
-                $geometry = $geometry_converter($image_width, $image_height, 1200, 1200);
-                $imagick->thumbnailImage($geometry['width'], $geometry['height'], false, true);
-                $imagick->writeImage($file_path['directory'].DIRECTORY_SEPARATOR.$file_path['file_name']);
+                    $geometry = $geometry_converter($image_width, $image_height, 1200, 1200);
+                    $imagick->thumbnailImage($geometry['width'], $geometry['height'], false, true);
+                    $imagick->writeImage($file_path['directory'].DIRECTORY_SEPARATOR.$file_path['file_name']);
 
-                $geometry = $geometry_converter($image_width, $image_height, 300, 300);
-                $imagick->thumbnailImage($geometry['width'], $geometry['height'], false, true);
-                $imagick->writeImage($small_file_path['directory'].DIRECTORY_SEPARATOR.$small_file_path['file_name']);
+                    $geometry = $geometry_converter($image_width, $image_height, 300, 300);
+                    $imagick->thumbnailImage($geometry['width'], $geometry['height'], false, true);
+                    $imagick->writeImage($small_file_path['directory'].DIRECTORY_SEPARATOR.$small_file_path['file_name']);
 
-                $image = new Image();
-                $image->path_small = $file_path['directory'].DIRECTORY_SEPARATOR.$file_path['file_name'];
-                $image->path_large = $file_path['directory'].DIRECTORY_SEPARATOR.$file_path['file_name'];
-                $image->src_large = $small_file_path['directory'].DIRECTORY_SEPARATOR.$small_file_path['file_name'];
-                $image->src_small = $small_file_path['directory'].DIRECTORY_SEPARATOR.$small_file_path['file_name'];
-                $image->mime_type = $mime_type;
+                    $image = new Image();
+                    $image->path_small = $file_path['directory'].DIRECTORY_SEPARATOR.$file_path['file_name'];
+                    $image->path_large = $file_path['directory'].DIRECTORY_SEPARATOR.$file_path['file_name'];
+                    $image->src_large = $small_file_path['directory'].DIRECTORY_SEPARATOR.$small_file_path['file_name'];
+                    $image->src_small = $small_file_path['directory'].DIRECTORY_SEPARATOR.$small_file_path['file_name'];
+                    $image->mime_type = $mime_type;
 
-                $image->save();
+                    $image->save();
 
-                return $image->id;
+                    return $image->id;
 
-            } catch (\Exception $exception){
-                return null;
+                } catch (\Exception $exception){
+                    return null;
+                }
             }
         }
 
