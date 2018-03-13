@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 /** Public routes */
 //Catalog routes
-Route::get('/catalog/{slug}', 'Catalog\CatalogController@show')->name('catalog.show');
+Route::get('/catalog/{slug}', 'Catalog\CatalogController@show')->name('catalog.slug');
 Route::get('/catalog', 'Catalog\CatalogController@index')->name('catalog.index');
 
 //Product routes
