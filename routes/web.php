@@ -15,7 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/backoffice', 'Backoffice\Admin\AdminController@index')->name('backoffice.index');
+/** Public routes */
+Route::get('/catalog/{slug}', 'Catalog\CatalogController@show')->name('catalog.show');
+Route::get('/catalog', 'Catalog\CatalogController@index')->name('catalog.index');
+
+/** Backoffice routes */
+Route::get('/backoffice/', 'Backoffice\Admin\AdminController@index')->name('backoffice.index');
 Route::resource('backoffice/catalog','Catalog\Admin\CatalogController');
 Route::resource('backoffice/product','Product\Admin\ProductController');
 Route::resource('backoffice/brand','Brand\Admin\BrandController');
