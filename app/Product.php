@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 use Illuminate\Database\Eloquent\Model,
@@ -21,6 +20,8 @@ use Illuminate\Database\Eloquent\Model,
  * @property \Illuminate\Database\Eloquent\Collection children
  * @property \App\Product parent
  * @property \App\Image image
+ * @property \App\Category category
+ * @property \App\Brand brand
  */
 class Product extends Model
 {
@@ -44,18 +45,20 @@ class Product extends Model
 
     /**
      * Adds Category one to many relationship
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function categories()
+    public function category()
     {
-        return $this->hasMany('App\Category');
+        return $this->belongsTo(Category::class);
     }
 
     /**
      * Adds Brand one to many relationship
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function brands()
+    public function brand()
     {
-        return $this->hasMany('App\Brand');
+        return $this->belongsTo(Brand::class);
     }
 
     /**
