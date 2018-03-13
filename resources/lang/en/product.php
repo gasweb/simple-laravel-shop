@@ -29,7 +29,7 @@ return [
     'admin_category_select_empty_option' => 'Select category',
     'admin_category_select_label' => 'Category',
     'form_enable' => 'Enable',
-    'form_available' => 'Available',
+    'form_in_stock' => 'In stock',
     'admin_list_table_children' => 'Children',
     'admin_product_select_empty_option' => 'Select product',
 
