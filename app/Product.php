@@ -4,6 +4,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model,
     Illuminate\Support\Facades\Lang,
     Illuminate\Support\Facades\Config;
+use SSD\Currency\Currency;
 
 /**
  * Class Product
@@ -93,5 +94,15 @@ class Product extends Model
     public function image()
     {
         return $this->belongsTo(Image::class, 'cover_image_id');
+    }
+
+    /**
+     * Price formatted with the currency symbol.
+     *
+     * @return string
+     */
+    public function priceDisplay()
+    {
+        return Currency::withPrefix($this->price, Config::get('currency.default'), 2);
     }
 }

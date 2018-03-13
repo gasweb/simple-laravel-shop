@@ -12,6 +12,7 @@
                     <a href="{!! route('product.slug', ['slug' => $product->alias ]); !!}">
                         {{ $product->title }}
                     </a>
+                    {{ $product->priceDisplay() }}
                 </div>
             @endforeach
         </div>
