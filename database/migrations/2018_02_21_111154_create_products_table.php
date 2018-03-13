@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
                 ->references('id')->on('products')
                 ->onDelete('cascade');
             $table->string('alias');
+            $table->string('template_name')->nullable();
             $table->string('title');
             $table->unsignedDecimal('price')->nullable();
             $table->text('preview_description')->nullable();
