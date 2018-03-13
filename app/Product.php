@@ -3,7 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model,
-    Illuminate\Support\Facades\Lang;
+    Illuminate\Support\Facades\Lang,
+    Illuminate\Support\Facades\Config;
 
 /**
  * Class Product
@@ -15,9 +16,10 @@ use Illuminate\Database\Eloquent\Model,
  * @property integer category_id
  * @property integer brand_id
  * @property boolean enable
- * @property boolean available
+ * @property boolean in_stock
  * @property \Illuminate\Database\Eloquent\Collection children
  * @property \App\Product parent
+ * @property \App\Image image
  */
 class Product extends Model
 {
@@ -64,5 +66,28 @@ class Product extends Model
         $products_list = self::where(['parent_id' => null])->pluck('title', 'id');
         $products_list->prepend(Lang::get('product.admin_product_select_empty_option'), '');
         return $products_list;
+    }
+
+    /**
+     * Gets cover image path
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
+    public function getImagePath()
+    {
+        if ($this->image)
+        {
+            return url($this->image->src_small);
+        }
+
+        return url(Config::get('shop.default_image_path'));
+    }
+
+    /**
+     * Foreign key connection with image table
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function image()
+    {
+        return $this->belongsTo(Image::class, 'cover_image_id');
     }
 }
