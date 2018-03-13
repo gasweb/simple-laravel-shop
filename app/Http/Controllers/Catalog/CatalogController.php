@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Catalog;
 
 use Illuminate\Http\Request;
 
@@ -11,25 +10,23 @@ use App\Http\Controllers\Controller,
 class CatalogController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of categories.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return "Some list of categories";
+        return view('catalog.category.public.index');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified category.
      *
      * @param  string $alias
      * @return \Illuminate\Http\Response
      */
     public function show($alias)
     {
-        $product_id = 1;
-
         /** @var \App\Category $category */
         $category = Category::where(['alias' => $alias])->first();
 
@@ -38,12 +35,9 @@ class CatalogController extends Controller
             die('No category');
         }
 
-        $products = Product::where(['category_id' => $category->id])->get();
-//        var_dump($category->id);
-//        var_dump($products);
-//        var_dump($product->categories()->first());
+        $products = Product::where(['category_id' => $category->id])->paginate(10);
 
-        return view('catalog.category.alias')->with([
+        return view('catalog.category.public.show')->with([
             'category' => $category,
             'products' => $products
         ]);
