@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
                 ->onDelete('cascade');
             $table->string('alias');
             $table->string('title');
+            $table->unsignedDecimal('price');
             $table->text('preview_description')->nullable();
             $table->text('description')->nullable();
             $table->text('application')->nullable();
