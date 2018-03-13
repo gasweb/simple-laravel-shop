@@ -20,6 +20,8 @@ $factory->define(App\Product::class, function (Faker $faker) {
         'price' => $faker->randomFloat(2, 100, 50000),
         'preview_description' => $faker->text(500),
         'category_id' => $faker->numberBetween(1,100),
-        'brand_id' => $faker->numberBetween(1,3)
+        'brand_id' => $faker->numberBetween(1,3),
+        'in_stock' => $faker->numberBetween(0,1),
+        'enable' => $faker->numberBetween(0,1),
     ];
 });
