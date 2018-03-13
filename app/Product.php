@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model,
  * @property integer id
  * @property string title
  * @property string alias
+ * @property string template_name
  * @property integer parent_id
  * @property integer category_id
  * @property integer brand_id
