@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
                 ->onDelete('cascade');
             $table->string('alias');
             $table->string('title');
-            $table->unsignedDecimal('price');
+            $table->unsignedDecimal('price')->nullable();
             $table->text('preview_description')->nullable();
             $table->text('description')->nullable();
             $table->text('application')->nullable();
@@ -42,7 +42,7 @@ class CreateProductsTable extends Migration
                 ->references('id')->on('images')
                 ->onDelete('set null');
             $table->boolean('enable')->nullable();
-            $table->boolean('available')->nullable();
+            $table->boolean('in_stock')->nullable();
             $table->timestamps();
         });
     }
