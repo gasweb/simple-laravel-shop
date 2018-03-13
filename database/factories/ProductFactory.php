@@ -18,6 +18,7 @@ $factory->define(App\Product::class, function (Faker $faker) {
         'alias' => $faker->slug,
         'title' => $faker->sentence,
         'preview_description' => $faker->text(500),
-        'category_id' => $faker->numberBetween(1,100)
+        'category_id' => $faker->numberBetween(1,100),
+        'brand_id' => $faker->numberBetween(1,3)
     ];
 });
