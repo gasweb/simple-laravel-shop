@@ -36,7 +36,7 @@
     @endif
 
     {{ Form::inputCheckbox('enable', trans('product.form_enable'), 1, $product->enable) }}
-    {{ Form::inputCheckbox('available', trans('product.form_available'), 1, $product->available) }}
+    {{ Form::inputCheckbox('in_stock', trans('product.form_in_stock'), 1, $product->in_stock) }}
 
     {{ Form::inputSubmit('submit', ['class' => 'btn btn-primary']) }}
     {{ Form::hidden('_method', 'PUT') }}
