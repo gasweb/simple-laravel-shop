@@ -114,7 +114,7 @@ class ProductController extends Controller
         $product->category_id = $request->input('parent', null);
         $product->brand_id = $request->input('brand', null);
         $product->enable = $request->input('enable', false);
-        $product->available = $request->input('available', false);
+        $product->in_stock = $request->input('in_stock', false);
 
         try
         {
