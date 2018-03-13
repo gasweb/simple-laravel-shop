@@ -26,6 +26,7 @@ return [
     'admin_new_category_link_text' => 'Create new category',
     'admin_menu_title' => 'Categories',
     'admin_category_select_empty_option' => 'Select category',
+    'category_breadcrumb_title' => 'Catalog',
 
 
 
