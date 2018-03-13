@@ -16,8 +16,12 @@ Route::get('/', function () {
 });
 
 /** Public routes */
+//Catalog routes
 Route::get('/catalog/{slug}', 'Catalog\CatalogController@show')->name('catalog.show');
 Route::get('/catalog', 'Catalog\CatalogController@index')->name('catalog.index');
+
+//Product routes
+Route::get('/product/{slug}', 'Product\ProductController@show')->name('product.slug');
 
 /** Backoffice routes */
 Route::get('/backoffice/', 'Backoffice\Admin\AdminController@index')->name('backoffice.index');
