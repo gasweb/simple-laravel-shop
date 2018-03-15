@@ -10,6 +10,7 @@ use SSD\Currency\Currency;
  * Class Product
  * @package App
  * @property integer id
+ * @property float price
  * @property string title
  * @property string alias
  * @property string template_name
@@ -103,6 +104,6 @@ class Product extends Model
      */
     public function priceDisplay()
     {
-        return Currency::withPrefix($this->price, Config::get('currency.default'), 2);
+        return $this->price;
     }
 }
