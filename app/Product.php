@@ -4,7 +4,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model,
     Illuminate\Support\Facades\Lang,
     Illuminate\Support\Facades\Config;
-use SSD\Currency\Currency;
+
+use Money\Currencies\ISOCurrencies,
+    Money\Currency,
+    Money\Formatter\IntlMoneyFormatter,
+    Money\Money;
 
 /**
  * Class Product
@@ -104,6 +108,17 @@ class Product extends Model
      */
     public function priceDisplay()
     {
-        return $this->price;
+        try
+        {
+            $money = new Money(100*$this->price, new Currency('RUB'));
+            $currencies = new ISOCurrencies();
+
+            $numberFormatter = new \NumberFormatter('ru_RU', \NumberFormatter::CURRENCY);
+            $moneyFormatter = new IntlMoneyFormatter($numberFormatter, $currencies);
+
+            return $moneyFormatter->format($money);
+        } catch (\Exception $exception){
+            return '';
+        }
     }
 }
