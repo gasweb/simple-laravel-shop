@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Content\ContentController@index')->name('home');
 
 /** Public routes */
 //Catalog routes
